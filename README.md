@@ -7,11 +7,11 @@
 <br>
 ---
 ## 日本語
-<br>
----
+
+
 ## English
-<br>
----
+
+
  ### Referenced Video
  #### Referenced Video 1
  - [UNITY3D | SEED BASED PROCEDURAL GENERATION & CHALLENGE](https://youtu.be/FXjvakWn6T0?si=Hwrx38bwYmeE5jx_)
