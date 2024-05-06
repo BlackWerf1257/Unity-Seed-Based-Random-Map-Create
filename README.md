@@ -22,5 +22,8 @@
  #### Referenced Video 1
  - [UNITY3D | SEED BASED PROCEDURAL GENERATION & CHALLENGE](https://youtu.be/FXjvakWn6T0?si=Hwrx38bwYmeE5jx_)
  #### Referenced Video 2
- - [Procedural Dungeon Generator in Unity [TUTORIAL]]([https://youtu.be/FXjvakWn6T0?si=Lu-oRvGPlS3uof-v](https://youtu.be/gHU5RQWbmWE?si=U8iifVAvDh8d3fLD))
+
+- [Procedural Dungeon Generator in Unity [TUTORIAL](https://youtu.be/FXjvakWn6T0?si=Lu-oRvGPlS3uof-v](https://youtu.be/gHU5RQWbmWE?si=U8iifVAvDh8d3fLD)
+
+
 
