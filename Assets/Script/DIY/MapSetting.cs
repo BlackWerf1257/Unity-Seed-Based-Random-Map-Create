@@ -61,15 +61,15 @@ public class MapSetting : MonoBehaviour
                     //down or right
                     if (newCellPos - 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[3] = true;
+                        rCell[curCellPos].wallStatus[2] = true;
                         curCellPos = newCellPos;
-                        rCell[curCellPos].wallStatus[1] = true;
+                        rCell[curCellPos].wallStatus[3] = true;
                     }
                     else
                     {
                         rCell[curCellPos].wallStatus[1] = true;
                         curCellPos = newCellPos;
-                        rCell[curCellPos].wallStatus[3] = true;
+                        rCell[curCellPos].wallStatus[0] = true;
                     }
                 }
                 else
@@ -77,21 +77,19 @@ public class MapSetting : MonoBehaviour
                     //up or left
                     if (newCellPos + 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[2] = true;
+                        rCell[curCellPos].wallStatus[3] = true;
                         curCellPos = newCellPos;
-                        rCell[curCellPos].wallStatus[0] = true;
+                        rCell[curCellPos].wallStatus[2] = true;
                     }
                     else
                     {
                         rCell[curCellPos].wallStatus[0] = true;
                         curCellPos = newCellPos;
-                        rCell[curCellPos].wallStatus[2] = true;
+                        rCell[curCellPos].wallStatus[1] = true;
                     }
                 }
             }
-            
         }
-        
         MapGen();
     }
 
@@ -99,6 +97,20 @@ public class MapSetting : MonoBehaviour
     {
         List<int> nearCell = new List<int>();
         nearCell.Add(cellPos);
+        
+        //Check for Up
+        if(cellPos - mapSize.x >= 0 && !rCell[cellPos-mapSize.x].isVisited)
+            nearCell.Add(cellPos - mapSize.x);
+        //Check for Down
+        if(cellPos + mapSize.x < rCell.Count && !rCell[cellPos+mapSize.x].isVisited)
+            nearCell.Add(cellPos + mapSize.x);
+        //Check for Left
+        if(cellPos % mapSize.x != 0 && !rCell[cellPos-1].isVisited)
+            nearCell.Add(cellPos - 1);
+        //Check for Right
+        if((cellPos+1) % mapSize.x != 0 && !rCell[cellPos+1].isVisited)
+            nearCell.Add(cellPos + 1);
+        
         return nearCell;
     }
 

@@ -227,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 866994573}
   - component: {fileID: 866994574}
+  - component: {fileID: 866994575}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -261,10 +262,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb5f82b1a894b04889a8d72352d7c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: {x: 30, y: 30}
+  mapSize: {x: 5, y: 5}
   mapOffSet: {x: 6, y: 6}
   roomObj: {fileID: 7442820272759336511, guid: 8ff06550bda076b4b8c552f6ccddcab1, type: 3}
-  startPos: 0
+  startPos: 20
+--- !u!114 &866994575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866994571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fa63fbdb6c05b4bbae4b249e91d9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 435
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
