@@ -61,9 +61,9 @@ public class MapSetting : MonoBehaviour
                     //down or right
                     if (newCellPos - 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[2] = true;
-                        curCellPos = newCellPos;
                         rCell[curCellPos].wallStatus[3] = true;
+                        curCellPos = newCellPos;
+                        rCell[curCellPos].wallStatus[2] = true;
                     }
                     else
                     {
@@ -77,9 +77,9 @@ public class MapSetting : MonoBehaviour
                     //up or left
                     if (newCellPos + 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[3] = true;
-                        curCellPos = newCellPos;
                         rCell[curCellPos].wallStatus[2] = true;
+                        curCellPos = newCellPos;
+                        rCell[curCellPos].wallStatus[3] = true;
                     }
                     else
                     {

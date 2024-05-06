@@ -12,7 +12,7 @@ public class Room_Variable : MonoBehaviour
       for (int i = 0; i < doorObj.Length; i++)
       {
          doorObj[i].SetActive(value[i]);
-         wallObj[i].SetActive(value[i]);
+         wallObj[i].SetActive(!value[i]);
       }
    }
 }
