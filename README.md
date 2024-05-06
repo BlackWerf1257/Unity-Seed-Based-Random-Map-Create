@@ -4,13 +4,13 @@
 ### 소개
 - 게임 개발 동아리인 Cullinan에서 Strayer를 작업하면서 맡은 시드 기반 맵 생성 코드입니다
 - 참고한 자료는 아래에 있습니다
-
 <br>
+---
 ## 日本語
-dd
 <br>
+---
 ## English
-<br><br><br>
+<br>
 ---
  ### Referenced Video
  #### Referenced Video 1
