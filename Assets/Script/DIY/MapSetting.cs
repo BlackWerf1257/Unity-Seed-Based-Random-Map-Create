@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MapSetting : MonoBehaviour
 {
+    
+    
     [Tooltip("맵 설정")]
     [SerializeField] private Vector2Int mapSize;
-    [SerializeField] private Vector2Int mapOffSet;
+    [SerializeField] private Vector2 mapOffSet;
     [SerializeField] private GameObject roomObj;
     [SerializeField] private int startPos;
+    [SerializeField] private ItemGenerator generator;
     class Room_Cell
     {
         public bool isVisited;
@@ -26,10 +30,8 @@ public class MapSetting : MonoBehaviour
     void MapVirSet()
     {
         for (int i = 0; i < mapSize.x; i++)
-        {
-        for (int j = 0; j < mapSize.y; j++)
-            rCell.Add(new Room_Cell());
-        }
+            for (int j = 0; j < mapSize.y; j++)
+                rCell.Add(new Room_Cell());
 
 
     int curCellPos = startPos;
@@ -48,8 +50,6 @@ public class MapSetting : MonoBehaviour
             {
                 if (path.Count == 0)
                     break;
-                else
-                    curCellPos = path.Pop();
             }
             else
             {
@@ -61,9 +61,9 @@ public class MapSetting : MonoBehaviour
                     //down or right
                     if (newCellPos - 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[3] = true;
-                        curCellPos = newCellPos;
                         rCell[curCellPos].wallStatus[2] = true;
+                        curCellPos = newCellPos;
+                        rCell[curCellPos].wallStatus[3] = true;
                     }
                     else
                     {
@@ -77,9 +77,9 @@ public class MapSetting : MonoBehaviour
                     //up or left
                     if (newCellPos + 1 == curCellPos)
                     {
-                        rCell[curCellPos].wallStatus[2] = true;
-                        curCellPos = newCellPos;
                         rCell[curCellPos].wallStatus[3] = true;
+                        curCellPos = newCellPos;
+                        rCell[curCellPos].wallStatus[2] = true;
                     }
                     else
                     {
@@ -96,7 +96,6 @@ public class MapSetting : MonoBehaviour
     List<int> CheckDuplicate(int cellPos)
     {
         List<int> nearCell = new List<int>();
-        nearCell.Add(cellPos);
         
         //Check for Up
         if(cellPos - mapSize.x >= 0 && !rCell[cellPos-mapSize.x].isVisited)
@@ -120,11 +119,17 @@ public class MapSetting : MonoBehaviour
         {
             for (int j = 0; j < mapSize.y; j++)
             {
+                Room_Cell roomCell = rCell[i + j * mapSize.x];
+                if(roomCell.isVisited)
+                {
                 var nRoom = Instantiate(roomObj, new Vector3(i * mapOffSet.x, 0, -j * mapOffSet.y)
                     , Quaternion.identity, transform).GetComponent<Room_Variable>();
                 nRoom.MapSetting(rCell[j * mapSize.x].wallStatus);
                 nRoom.name = "Room " + i + "-" + j;
+                generator.objTrans.Add(nRoom.transform);
+                }
             }
         }
+        generator.ItemCreate();
     }
 }

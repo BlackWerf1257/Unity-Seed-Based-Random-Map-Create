@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Generator : MonoBehaviour
+public class ItemGenerator : MonoBehaviour
 {
     [SerializeField] Transform parentObj;
     private List<Transform> floorObj;
@@ -12,7 +12,8 @@ public class Generator : MonoBehaviour
     [SerializeField] public List<GameObject> trapObj;
     [SerializeField] public List<GameObject> itemObj;
 
-    private List<Transform> objTrans = new List<Transform>(0);
+    [HideInInspector]
+    public List<Transform> objTrans = new List<Transform>(0);
 
     [SerializeField] private int mapSize;
 
@@ -20,7 +21,7 @@ public class Generator : MonoBehaviour
     [SerializeField] int enemyCount = 10;
     [SerializeField] int trapCount = 5;
     // Start is called before the first frame update
-    void Start()
+    public void ItemCreate()
     {
         //Prop
         MapSetting(itemObj, propCount);
