@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class ItemGenerator : MonoBehaviour
 {
-    [SerializeField] Transform parentObj;
+    Transform parentObj;
     private List<Transform> floorObj;
     [SerializeField] public List<GameObject> enemyObj;
     [SerializeField] public List<GameObject> trapObj;
@@ -14,21 +14,28 @@ public class ItemGenerator : MonoBehaviour
 
     [HideInInspector]
     public List<Transform> objTrans = new List<Transform>(0);
+    public Transform SetParentTrans
+    {
+        get => parentObj;
+        set => parentObj = value;
+    }
 
-    [SerializeField] private int mapSize;
+    public int roomSize { get; set; }
 
-    [SerializeField] int propCount = 4;
-    [SerializeField] int enemyCount = 10;
-    [SerializeField] int trapCount = 5;
+
+
+    [SerializeField] int maxPropCount = 4;
+    [SerializeField] int maxEnemyCount = 10;
+    [SerializeField] int maxTrapCount = 5;
     // Start is called before the first frame update
     public void ItemCreate()
     {
         //Prop
-        MapSetting(itemObj, propCount);
+        //MapSetting(itemObj, Random.Range(0, maxPropCount));
         //Trap
-        MapSetting(trapObj, trapCount);
+        MapSetting(trapObj, Random.Range(0, maxTrapCount));
         //Enemy
-        MapSetting(enemyObj, enemyCount);
+        //MapSetting(enemyObj, Random.Range(0, maxEnemyCount));
         
     }
 
@@ -36,14 +43,14 @@ public class ItemGenerator : MonoBehaviour
     {
         for (int i = 0; i < objCnt; i++)
         {
-            Vector3 pos = Random.insideUnitSphere * mapSize;
+            Vector3 pos =  parentObj.position + Random.insideUnitSphere * roomSize;
 
                 if (objTrans.Count != 0)
                 {
                     for (int objIdx = 0; i < objTrans.Count; objIdx++)
                     {
-                        if (!(Mathf.Abs(objTrans[objIdx].position.x - pos.x) > 10) ||
-                            !(Mathf.Abs(objTrans[objIdx].position.z - pos.z) > 10))
+                        if (!(Mathf.Abs(objTrans[objIdx].position.x - pos.x) > 5) ||
+                            !(Mathf.Abs(objTrans[objIdx].position.z - pos.z) > 5))
                             break;
                         else MapSetting(obj, objCnt);
                     }
@@ -52,10 +59,10 @@ public class ItemGenerator : MonoBehaviour
                 pos.y = 1f;
             GameObject selected = obj[Random.Range(0, obj.Count)];
             
-            GameObject ground = Instantiate(selected, pos, Quaternion.identity);
+            GameObject ground = Instantiate(selected, Vector3.zero, Quaternion.identity, SetParentTrans);
+            ground.transform.position = pos;
             objTrans.Add(ground.transform);
             ground.transform.localScale = Vector3.one;
-            ground.transform.parent = parentObj;
             ground.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
           
             StartCoroutine(DestoryRigidbody(ground.GetComponent<Rigidbody>()));
@@ -63,7 +70,7 @@ public class ItemGenerator : MonoBehaviour
 
         IEnumerator DestoryRigidbody(Rigidbody rigid)
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(2f);
             Destroy(rigid);
         }
     }

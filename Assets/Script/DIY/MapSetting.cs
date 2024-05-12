@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
@@ -32,7 +33,6 @@ public class MapSetting : MonoBehaviour
         for (int i = 0; i < mapSize.x; i++)
             for (int j = 0; j < mapSize.y; j++)
                 rCell.Add(new Room_Cell());
-
 
     int curCellPos = startPos;
         Stack<int> path = new Stack<int>();
@@ -115,6 +115,8 @@ public class MapSetting : MonoBehaviour
 
     void MapGen()
     {
+        generator.roomSize = (int)(mapOffSet.x);
+        
         for (int i = 0; i < mapSize.x; i++)
         {
             for (int j = 0; j < mapSize.y; j++)
@@ -127,9 +129,11 @@ public class MapSetting : MonoBehaviour
                 nRoom.MapSetting(rCell[j * mapSize.x].wallStatus);
                 nRoom.name = "Room " + i + "-" + j;
                 generator.objTrans.Add(nRoom.transform);
+                generator.SetParentTrans = nRoom.transform;
+                generator.ItemCreate();
                 }
             }
         }
-        generator.ItemCreate();
+        
     }
 }
