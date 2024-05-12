@@ -43,7 +43,7 @@ public class ItemGenerator : MonoBehaviour
     {
         for (int i = 0; i < objCnt; i++)
         {
-            Vector3 pos =  parentObj.position + Random.insideUnitSphere * roomSize;
+            Vector3 pos =  Random.insideUnitSphere * roomSize;
 
                 if (objTrans.Count != 0)
                 {
@@ -60,7 +60,7 @@ public class ItemGenerator : MonoBehaviour
             GameObject selected = obj[Random.Range(0, obj.Count)];
             
             GameObject ground = Instantiate(selected, Vector3.zero, Quaternion.identity, SetParentTrans);
-            ground.transform.position = pos;
+            ground.transform.localPosition = pos;
             objTrans.Add(ground.transform);
             ground.transform.localScale = Vector3.one;
             ground.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
